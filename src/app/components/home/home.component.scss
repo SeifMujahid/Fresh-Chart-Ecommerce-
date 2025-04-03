@@ -1,0 +1,27 @@
+.product {
+  overflow: hidden;
+
+  .btn-main {
+    opacity: 0;
+    -o-transition: 0.8s;
+    -webkit-transition: 0.8s;
+    -moz-transition: 0.8s;
+    -ms-transition: 0.8s;
+    transition: 0.8s;
+    -o-transform: translateY(150%);
+    -webkit-transform: translateY(150%);
+    -moz-transform: translateY(150%);
+    -ms-transform: translateY(150%);
+    transform: translateY(150%);
+  }
+  &:hover {
+    .btn-main {
+      opacity: 1;
+      -o-transform: translateY(0%);
+      -webkit-transform: translateY(0%);
+      -moz-transform: translateY(0%);
+      -ms-transform: translateY(0%);
+      transform: translateY(0%);
+    }
+  }
+}

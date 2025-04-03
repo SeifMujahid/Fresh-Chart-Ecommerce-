@@ -1,1 +1,143 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+
+$main-color: #0aad0a;
+$light-color: #f0f3f2;
+$shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
+  rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
+  rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
+$font-family: "Encode Sans Expanded", sans-serif;
+$rating-color: #ffc908;
+$main-transition: 0.8s;
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0aad0a;
+  border-radius: 5px;
+  border: 2px solid #f1f1f1;
+}
+
+body {
+  font-family: $font-family !important;
+}
+
+.nav-link {
+  transition: unset !important;
+}
+.active-link {
+  background-color: $main-color !important;
+  color: $light-color !important;
+  -o-border-radius: 5px !important;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  -ms-border-radius: 5px !important;
+  border-radius: 5px !important;
+}
+
+.rating-color {
+  color: $rating-color;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+a,
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+.product {
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid $main-color;
+  padding: 5px;
+  box-shadow: $shadow;
+  transition: $main-transition;
+  -webkit-transition: $main-transition;
+  -moz-transition: $main-transition;
+  -ms-transition: $main-transition;
+  -o-transition: $main-transition;
+
+  .heart,
+  .heart2 {
+    font-size: 25px;
+    z-index: 99;
+    cursor: pointer;
+    transition: 0.8s;
+    transform: translateX(40px);
+    -webkit-transform: translateX(40px);
+    -moz-transform: translateX(40px);
+    -ms-transform: translateX(40px);
+    -o-transform: translateX(40px);
+    -webkit-transition: 0.8s;
+    -moz-transition: 0.8s;
+    -ms-transition: 0.8s;
+    -o-transition: 0.8s;
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 10px #11bd11;
+    transform: translateY(-10px);
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    -o-transform: translateY(-10px);
+
+    .heart,
+    .heart2 {
+      transform: translateX(0px);
+      -webkit-transform: translateX(0px);
+      -moz-transform: translateX(0px);
+      -ms-transform: translateX(0px);
+      -o-transform: translateX(0px);
+    }
+  }
+}
+.font-sm {
+  font-size: 12px;
+}
+.text-main {
+  color: $main-color !important;
+}
+.text-main-light {
+  color: $light-color !important;
+}
+.bg-main {
+  background-color: $main-color !important;
+}
+.bg-main-light {
+  background-color: $light-color !important;
+}
+.btn-main {
+  background-color: $main-color;
+  padding: 7px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  -o-transition: background-color 0.5s;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -ms-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #ccc;
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+  &:hover {
+    background-color: #11bd11;
+  }
+}

@@ -1,0 +1,24 @@
+<section *ngIf="display; else spinner" class="my-3 p-3">
+  <div class="row g-4 justify-content-center">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let category of categories">
+      <div
+        class="border border-success rounded p-2 shadow category"
+        role="button"
+        [routerLink]="['/categorydetails', category._id]"
+      >
+        <img
+          [src]="category.image"
+          [alt]="category.name"
+          class="w-100"
+          height="350"
+        />
+        <h3 class="text-center text-main my-3">{{ category.name }}</h3>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #spinner>
+  <p class="fs-1 fw-bold text-center mt-5">
+    <i class="fa-solid fa-spinner fa-spin"></i>
+  </p>
+</ng-template>

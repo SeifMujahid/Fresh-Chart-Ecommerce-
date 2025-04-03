@@ -1,0 +1,50 @@
+<section *ngIf="display; else spinner" class="my-3 p-3">
+  <div class="row g-4" *ngIf="products.length > 0; else noproducts">
+    <div
+      class="col-sm-6 col-md-4 col-lg-3 col-xl-2"
+      *ngFor="let product of products"
+    >
+      <div class="product h-100">
+        <div (click)="removeFromWishList(product._id)">
+          <i class="fa-solid fa-trash p-1 float-end text-main trash"></i>
+        </div>
+        <header [routerLink]="['/productdetails', product._id]">
+          <img
+            [src]="product.imageCover"
+            [alt]="product.title"
+            [title]="product.title"
+            class="w-100"
+          />
+          <h4 class="h6 text-main my-3 fw-bolder">
+            {{ product.category.name }}
+          </h4>
+          <h3 class="h6 small">{{ product.title | cuttext : 3 }}</h3>
+          <div class="d-flex align-items-center justify-content-between">
+            <span>{{ product.price | currency : "E£ " }}</span>
+            <span>
+              <i class="fas fa-star rating-color"></i
+              >{{ product.ratingsAverage }}
+            </span>
+          </div>
+        </header>
+        <footer>
+          <button
+            class="btn-main w-100"
+            (click)="add(product._id, added)"
+            #added
+          >
+            Add To Cart
+          </button>
+        </footer>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #spinner>
+  <p class="fs-1 fw-bold text-center mt-5">
+    <i class="fa-solid fa-spinner fa-spin"></i>
+  </p>
+</ng-template>
+<ng-template #noproducts>
+  <h1 class="text-center">Your Wish List Is Empty...</h1>
+</ng-template>

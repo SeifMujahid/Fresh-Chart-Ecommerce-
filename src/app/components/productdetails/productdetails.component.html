@@ -1,0 +1,49 @@
+<section *ngIf="display; else msg">
+  <div
+    class="row align-items-center mx-auto w-75 my-5 bg-main-light p-3 rounded shadow"
+  >
+    <div class="col-md-3 p-3">
+      <owl-carousel-o [options]="detailsOptions">
+        <ng-container *ngFor="let image of productDetails.images">
+          <ng-template carouselSlide [id]="productDetails._id">
+            <img
+              [src]="image"
+              [alt]="productDetails.description"
+              class="w-100"
+            />
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+    <div class="col-md-9 p-3">
+      <header>
+        <h4 class="h4 text-main my-3 fw-bold">
+          {{ productDetails.category.name }}
+        </h4>
+        <h3 class="h6 my-3">{{ productDetails.title }}</h3>
+        <p class="my-3 text-muted">{{ productDetails.description }}</p>
+        <div class="d-flex align-items-center justify-content-between my-3">
+          <span>{{ productDetails.price | currency : "E£" }}</span>
+          <span>
+            <i class="fas fa-star rating-color"></i
+            >{{ productDetails.ratingsAverage }}
+          </span>
+        </div>
+      </header>
+      <footer>
+        <button
+          class="btn-main w-100"
+          (click)="add(productDetails._id, added)"
+          #added
+        >
+          Add To Cart
+        </button>
+      </footer>
+    </div>
+  </div>
+</section>
+<ng-template #msg>
+  <p class="fs-1 fw-bold text-center mt-5">
+    <i class="fa-solid fa-spinner fa-spin"></i>
+  </p>
+</ng-template>

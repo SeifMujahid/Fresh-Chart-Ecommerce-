@@ -1,0 +1,39 @@
+<section class="w-50 bg-main-light rounded p-4 mx-auto my-5 shadow">
+  <h1 class="h3">Checkout Session</h1>
+  <form [formGroup]="paymentForm" (ngSubmit)="handelForm()">
+    <div class="mb-3">
+      <label for="details">Details</label>
+      <textarea
+        name="details"
+        id="details"
+        placeholder="Add Details..."
+        class="form-control area"
+        formControlName="details"
+        maxlength="100"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="phone">Phone</label>
+      <input
+        type="tel"
+        id="phone"
+        class="form-control"
+        formControlName="phone"
+        placeholder="Your Phone..."
+        maxlength="11"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="city">City</label>
+      <input
+        type="text"
+        id="city"
+        class="form-control"
+        formControlName="city"
+        placeHolder="Your City..."
+        maxlength="11"
+      />
+    </div>
+    <button class="btn-main" [disabled]="send">Checkout</button>
+  </form>
+</section>

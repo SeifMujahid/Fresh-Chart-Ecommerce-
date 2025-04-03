@@ -1,0 +1,87 @@
+<section *ngIf="display; else spinner">
+  <div
+    class="w-75 mx-auto rounded shadow bg-main-light p-3 my-3"
+    *ngIf="userCart.products.length > 0; else noproducts"
+  >
+    <h1 class="h3">Shop Cart</h1>
+    <p class="text-main">
+      Total Price : {{ userCart.totalCartPrice | currency : "E£ " }}
+    </p>
+    <div
+      class="row border-3 border-bottom p-3 align-items-center"
+      *ngFor="let cartItem of userCart.products"
+    >
+      <div class="col-md-3">
+        <img
+          [src]="cartItem.product.imageCover"
+          [alt]="cartItem.product.title"
+          class="w-100 rounded"
+        />
+      </div>
+      <div class="col-md-9 d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="h5">{{ cartItem.product.title }}</h2>
+          <p class="text-main">
+            Price : {{ cartItem.price | currency : "E£ " }}
+          </p>
+          <button
+            class="btn-main"
+            (click)="removeItem(cartItem.product._id, remove)"
+            #remove
+          >
+            <i class="fas fa-trash-can"></i> Remove
+          </button>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <button
+            class="btn btn-sm border-2 border-success text-main fw-bold fs-3"
+            #update1
+            (click)="
+              updateItem(
+                cartItem.product._id,
+                cartItem.count - 1,
+                update1,
+                update2
+              )
+            "
+          >
+            -
+          </button>
+          <span class="mx-2 fs-5 fw-bolder">{{ cartItem.count }}</span>
+          <button
+            class="btn btn-sm border-2 border-success text-main fw-bold fs-3"
+            #update2
+            (click)="
+              updateItem(
+                cartItem.product._id,
+                cartItem.count + 1,
+                update1,
+                update2
+              )
+            "
+          >
+            +
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="my-3 d-flex align-items-center justify-content-between">
+      <button class="btn-main" #clearBtn (click)="clear(clearBtn)">
+        <i class="fas fa-trash-can"></i> Clear My Cart
+      </button>
+      <button class="btn-main" [routerLink]="['/payment', userCart._id]">
+        Online Payment
+        <img src="./assets/images/visa-1.svg" alt="visa" width="20" />
+        <img src="./assets/images/master.svg" alt="mastercard" width="20px" />
+      </button>
+    </div>
+  </div>
+</section>
+<ng-template #spinner>
+  <p class="fs-1 fw-bold text-center mt-5">
+    <i class="fa-solid fa-spinner fa-spin"></i>
+  </p>
+</ng-template>
+<ng-template #noproducts>
+  <h1 class="text-center">Your Cart Is Empty...</h1>
+</ng-template>

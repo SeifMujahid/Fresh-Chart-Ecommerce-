@@ -1,0 +1,67 @@
+<section class="p-3 w-50 mx-auto my-3 bg-main-light rounded shadow">
+  <h1 class="my-3 h2">Login</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="handelForm()">
+    <div class="form-item">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+    </div>
+    <div
+      *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched"
+      class="alert alert-danger p-1 w-fit my-1"
+    >
+      <p
+        *ngIf="loginForm.get('email')?.getError('required')"
+        class="my-auto px-2"
+      >
+        Required
+      </p>
+      <p *ngIf="loginForm.get('email')?.getError('email')" class="my-auto px-2">
+        Email Format
+      </p>
+    </div>
+    <div class="form-item">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+      />
+    </div>
+    <div
+      *ngIf="
+        loginForm.get('password')?.errors && loginForm.get('password')?.touched
+      "
+      class="alert alert-danger p-1 w-fit my-1"
+    >
+      <p
+        *ngIf="loginForm.get('password')?.getError('required')"
+        class="my-auto px-2"
+      >
+        Required
+      </p>
+      <p
+        *ngIf="loginForm.get('password')?.getError('pattern')"
+        class="my-auto px-2"
+      >
+        Invalid Password
+      </p>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <a routerLink="/forgetpasswordauth" class="text-main">Forget Password ?</a>
+      <button class="btn-main mt-3" [disabled]="loginForm.invalid">
+        Login
+        <span *ngIf="spinner"><i class="fas fa-spin fa-spinner"></i></span>
+      </button>
+    </div>
+  </form>
+  <div *ngIf="errorMessage" class="alert alert-danger p-1 w-fit my-1 mx-auto">
+    {{ errorMessage }}
+  </div>
+</section>

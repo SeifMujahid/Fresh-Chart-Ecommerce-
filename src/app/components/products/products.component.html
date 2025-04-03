@@ -1,0 +1,97 @@
+<section class="py-3">
+  <h2 class="mb-4">Shop All Products</h2>
+  <input
+    type="text"
+    class="form-control w-50 mx-auto mt-3 my-4 border-2 border-success"
+    placeholder="Search..."
+    [(ngModel)]="searchTerm"
+  />
+  <div class="row g-4 justify-content-center" *ngIf="display; else spinner">
+    <div
+      class="col-sm-6 col-md-4 col-lg-3 col-xl-2"
+      *ngFor="
+        let product of products
+          | search : searchTerm
+          | paginate
+            : {
+                id: 'productPaginate',
+                itemsPerPage: pageSize,
+                currentPage: page,
+                totalItems: total
+              }
+      "
+    >
+      <div class="product h-100">
+        <div
+          (click)="addToFav(product._id)"
+          *ngIf="!wishlist.includes(product._id)"
+        >
+          <i class="fa-regular fa-heart p-1 float-end text-main heart"></i>
+        </div>
+        <div
+          (click)="removeFromWishList(product._id)"
+          *ngIf="wishlist.includes(product._id)"
+        >
+          <i class="fa-solid fa-heart p-1 float-end text-main heart2"></i>
+        </div>
+        <header [routerLink]="['/productdetails', product._id]">
+          <img
+            [src]="product.imageCover"
+            [alt]="product.title"
+            [title]="product.title"
+            class="w-100"
+          />
+          <h4 class="h6 text-main my-3 fw-bolder">
+            {{ product.category.name }}
+          </h4>
+          <h3 class="h6 small">{{ product.title | cuttext : 2 }}</h3>
+          <div class="d-flex align-items-center justify-content-between">
+            <span>{{ product.price | currency : "E£ " }}</span>
+            <span class="text-end">
+              {{ product.ratingsAverage }}
+              <br />
+              <i
+                [class.rating-color]="product.ratingsAverage >= star"
+                *ngFor="let star of [1, 2, 3, 4, 5]"
+                class="fas fa-star"
+              ></i>
+            </span>
+          </div>
+        </header>
+        <footer>
+          <button
+            class="btn-main w-100"
+            (click)="add(product._id, added)"
+            #added
+          >
+            Add To Cart
+          </button>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center my-4 my-pagination">
+    <pagination-controls
+      id="productPaginate"
+      (pageChange)="pageChanged($event)"
+      (pageBoundsCorrection)="pageChanged($event)"
+      [maxSize]="9"
+      [directionLinks]="true"
+      [autoHide]="true"
+      [responsive]="true"
+      previousLabel="Previous"
+      nextLabel="Next"
+      screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page"
+    >
+    </pagination-controls>
+  </div>
+</section>
+
+<ng-template #spinner>
+  <p class="fs-1 fw-bold text-center mt-5">
+    <i class="fa-solid fa-spinner fa-spin"></i>
+  </p>
+</ng-template>
